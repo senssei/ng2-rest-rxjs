@@ -1,3 +1,33 @@
 <h1>
-  {{title}}
+  'app works!'
 </h1>
+<table *ngIf="posts">
+  <thead>
+    <th>id</th>
+    <th>title</th>
+    <th>author</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of posts">
+      <td>{{item.id}}</td>
+      <td>{{item.title}}</td>
+      <td>{{item.author}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<div>
+  <form (ngSubmit)="onSubmit(); ngForm.reset();" #postForm="ngForm">
+    <div>
+    <label>Title</label>
+    <input type="text" [(ngModel)]="post.title" required name="title" #title="ngModel">
+    </div>
+    <div>
+      <label>Author</label>
+      <input type="text" [(ngModel)]="post.author" required name="author" #author="ngModel">
+    </div>
+
+
+    <button type="submit" [disabled]="!postForm.valid" (click)="postForm.sent();postForm.reset()">Add</button>
+  </form>
+</div>
